@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta charset = "utf-8">
+<title>
+</title>
+<script src="712.js"></script>
+</head>
+
+<body onLoad="checkBalance()">
+<p>Your purchase amounts</p>
+<ol id="charges">
+</ol>
+<br>
+<!-- <p>Your refund amounts</p>
+<ol id="refunds">
+</ol> -->
+
+<div id="debug"></div>
+
+<script>
+// From: http://www.webdeveloper.com/forum/showthread.php?293375-help-with-javascript-calculation
+
+var accountActivity = [];//this is the charges and debits to the account
+
+function checkBalance() {
+/*  removed for testing purposes only
+  alert('hello, my name is omid nassir. welcome to my program. please click okay to continue');
+  var firstName = prompt('what is your first name?');
+  var lastName = prompt('what is your last name?');
+  var fullName = firstName + " " + lastName;
+  alert('Hello ' + fullName + '. Please enter the charges and refunds for your shopping this month, please click okay to continue');
+*/
+
+  var count = 0;
+  var total = 100;
+  var done = false;
+  while(count<total && !done) {
+    var charge = prompt('please enter charge');  if (charge == '') { done = true; }
+    var credit = prompt('please enter refund');  if (credit == '') { done = true; }
+    if (! done) {
+      var cost = parseInt(charge, 10);
+      var refund = parseInt(credit, 10);
+
+  accountActivity.push('Cost: '+cost+'   Refund: '+refund);
+  count = (count + cost) - refund;  total += count;
+  document.getElementById('debug').innerHTML += 'Activity: ' + count + '  Balance: '+ (total-cost+refund)+'<br>';
+  if(count >total) alert(fullName + ' you are spending too much!');
+  document.getElementById('charges').innerHTML = "<li>" + accountActivity.join("</li><li>") + "</li>";
+}
+  }
+} 
+</script>
+</body>
+</html>
